@@ -1,0 +1,4 @@
+[submodule "wp-content/themes/NeoBCB21"]
+	path = wp-content/themes/NeoBCB21
+	url = git@github.com:BarcampBangalore/bcb-theme.git
+	branch = master
