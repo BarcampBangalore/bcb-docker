@@ -1,0 +1,28 @@
+version: '3.5'
+services:
+  wordpress:
+    image: wordpress:4.9.8
+    restart: on-failure
+    ports:
+    - 80:80
+    volumes:
+      - ./wp-content/themes:/var/www/html/wp-content/themes
+      - ./wp-content/plugins:/var/www/html/wp-content/plugins
+      - ./wp-content/uploads:/var/www/html/wp-content/uploads
+      - ./wp-config/wp-config.php:/var/www/html/wp-config.php
+  mysql:
+    image: mysql:5.7
+    restart: on-failure
+    ports:
+    - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: bcbwp
+    volumes:
+      - ./dbdata:/var/lib/mysql
+      - ./migration-scripts:/docker-entrypoint-initdb.d/
+  adminer:
+    image: adminer:4.6.3
+    restart: on-failure
+    ports:
+    - 8080:8080
