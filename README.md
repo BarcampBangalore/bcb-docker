@@ -25,7 +25,7 @@ This is designed only for **dev, not for production**. Weakness includes:
 
 - Clone the repo: (see [this Stack Overflow answer](https://stackoverflow.com/q/3796927/92837))
 
-      git clone --recurse-submodules 
+      git clone --recurse-submodules git@github.com:BarcampBangalore/bcb-docker.git
       
  - place `bcbwp.sql` file in `migration-scripts/` directory
  - Start Compose
