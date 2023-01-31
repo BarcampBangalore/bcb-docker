@@ -1,17 +1,27 @@
 version: '3.5'
 services:
   wordpress:
-    image: wordpress:4.9.8
+    image: wordpress:6.0.2
     restart: on-failure
     ports:
     - 80:80
     volumes:
-      - ./wp-content/themes:/var/www/html/wp-content/themes
-      - ./wp-content/plugins:/var/www/html/wp-content/plugins
-      - ./wp-content/uploads:/var/www/html/wp-content/uploads
-      - ./wp-config/wp-config.php:/var/www/html/wp-config.php
+      - type: bind
+        source: ./wp-content/themes
+        target: /var/www/html/wp-content/themes
+      - type: bind
+        source: ./wp-content/plugins
+        target: /var/www/html/wp-content/plugins
+      - type: bind
+        source: ./wp-content/uploads
+        target: /var/www/html/wp-content/uploads
+      - type: bind
+        source: ./wp-config/wp-config.php
+        target: /var/www/html/wp-config.php
+    depends_on:
+      - mysql
   mysql:
-    image: mysql:5.7
+    image: mysql:8.0
     restart: on-failure
     ports:
     - 3306:3306
@@ -19,10 +29,18 @@ services:
       MYSQL_ROOT_PASSWORD: example
       MYSQL_DATABASE: bcbwp
     volumes:
-      - ./dbdata:/var/lib/mysql
-      - ./migration-scripts:/docker-entrypoint-initdb.d/
+      - type: bind
+        source: ./dbdata
+        target: /var/lib/mysql
+        bind:
+          create_host_path: true
+      - type: bind
+        source: ./migration-scripts
+        target: /docker-entrypoint-initdb.d
   adminer:
-    image: adminer:4.6.3
+    image: adminer:4.8.1
     restart: on-failure
     ports:
     - 8080:8080
+    depends_on:
+      - mysql

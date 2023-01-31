@@ -1,0 +1,19 @@
+{
+    "build": {"dockerfile": "Dockerfile"},
+
+    "runArgs": ["--init"],
+    "mounts": ["source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"],
+
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "bengreenier.vscode-node-readme",
+                "christian-kohler.path-intellisense",
+                "yzhang.markdown-all-in-one",
+                "ms-azuretools.vscode-docker",
+                "eamodio.gitlens",
+                "devsense.phptools-vscode"
+            ]
+        }
+    }
+}
