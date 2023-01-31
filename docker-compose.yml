@@ -7,16 +7,16 @@ services:
     - 80:80
     volumes:
       - type: bind
-        source: ./wp-content/themes
-        target: /var/www/html/wp-content/themes
+        source: ${HOST_PROJECT_PATH}/wp-content/themes/NeoBCB21
+        target: /var/www/html/wp-content/themes/NeoBCB21
+      # - type: bind
+      #   source: ${HOST_PROJECT_PATH}/wp-content/plugins/MyPluginName
+      #   target: /var/www/html/wp-content/plugins/MyPluginName
       - type: bind
-        source: ./wp-content/plugins
-        target: /var/www/html/wp-content/plugins
-      - type: bind
-        source: ./wp-content/uploads
+        source: ${HOST_PROJECT_PATH}/wp-content/uploads
         target: /var/www/html/wp-content/uploads
       - type: bind
-        source: ./wp-config/wp-config.php
+        source: ${HOST_PROJECT_PATH}/wp-config/wp-config.php
         target: /var/www/html/wp-config.php
     depends_on:
       - mysql
@@ -30,12 +30,12 @@ services:
       MYSQL_DATABASE: bcbwp
     volumes:
       - type: bind
-        source: ./dbdata
+        source: ${HOST_PROJECT_PATH}/dbdata
         target: /var/lib/mysql
         bind:
           create_host_path: true
       - type: bind
-        source: ./migration-scripts
+        source: ${HOST_PROJECT_PATH}/migration-scripts
         target: /docker-entrypoint-initdb.d
   adminer:
     image: adminer:4.8.1

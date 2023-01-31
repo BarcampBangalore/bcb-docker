@@ -4,6 +4,10 @@
     "runArgs": ["--init"],
     "mounts": ["source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"],
 
+    "remoteEnv": {
+        "HOST_PROJECT_PATH": "${localWorkspaceFolder}"
+    },
+
     "customizations": {
         "vscode": {
             "extensions": [

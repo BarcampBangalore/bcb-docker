@@ -1,3 +1,4 @@
 dbdata/*
 .idea/
 migration-scripts/bcbwp.sql
+wp-content/uploads/*
